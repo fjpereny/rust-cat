@@ -5,7 +5,7 @@ authors = ["Frank Pereny"]
 edition = "2021"
 description = "A fully functional clone of the GNU concat tool built completely in Rust."
 readme = "README.md"
-license = "LICENSE"
+license = "GPL-3.0-only"
 repository = "https://github.com/fjpereny/rust-cat"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
