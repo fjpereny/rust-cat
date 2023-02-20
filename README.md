@@ -26,6 +26,5 @@ Examples:
   rcat f - g  Output f's contents, then standard input, then g's contents.
   rcat        Copy standard input to standard output.
 
-RNGNU online help: <https://www.frankpereny.com/rcat>
-Full documentation <https://www.frankpereny.com/rcat/docs>
-or available locally via: info '(coreutils) cat invocation'
+Git Repository: <https://github.com/fjpereny/rust-cat>
+Crate
