@@ -162,17 +162,65 @@ pub fn parse_args(args: &[String]) -> (ArgSwitch, Vec<&String>) {
 
 
 pub fn get_content(file_path: &str, arg_switch: &ArgSwitch) -> String {
-    let content = fs::read(file_path).unwrap();
+    let content = fs::read(file_path).unwrap_or_else(|err| {
+        println!();
+        print!("{}", "WARNING:".on_bright_yellow());
+        println!(" Unable to read file.");
+        println!("({err})");
+        process::exit(1);
+    });
     let mut result = String::new();
     let mut i = 1;
     let mut prev_prev_char = '\0';
     let mut prev_char = '\n';
     for c in content {
-        let c = c as char;
-
         if arg_switch.show_nonprinting {
-            
+            if c <= 31 || c == 127 {
+                result.push('^');
+                match c {
+                    0 => result.push('@'),
+                    1 => result.push('A'),
+                    2 => result.push('B'),
+                    3 => result.push('C'),
+                    4 => result.push('D'),
+                    5 => result.push('E'),
+                    6 => result.push('F'),
+                    7 => result.push('G'),
+                    8 => result.push('H'),
+                    9 => result.push('I'),
+                    10 => result.push('J'),
+                    11 => result.push('K'),
+                    12 => result.push('L'),
+                    13 => result.push('M'),
+                    14 => result.push('N'),
+                    15 => result.push('O'),
+                    16 => result.push('P'),
+                    17 => result.push('Q'),
+                    18 => result.push('R'),
+                    19 => result.push('S'),
+                    20 => result.push('T'),
+                    21 => result.push('U'),
+                    22 => result.push('V'),
+                    23 => result.push('W'),
+                    24 => result.push('X'),
+                    25 => result.push('Y'),
+                    26 => result.push('Z'),
+                    27 => result.push('['),
+                    28 => result.push('\\'),
+                    29 => result.push(']'),
+                    30 => result.push('^'),
+                    31 => result.push('_'),
+                    127 => result.push('?'),
+                    _ => {
+                        let c = c as char;
+                        result.push(c);
+                    }
+                }
+                continue;
+            }            
         }
+
+        let c = c as char;
 
         if arg_switch.show_tabs && c == '\t' {
             result.push_str("^I");
@@ -227,7 +275,9 @@ pub fn get_content(file_path: &str, arg_switch: &ArgSwitch) -> String {
             result.push('$');
         }
 
-        result.push(c);
+        if is_printable(&c) || arg_switch.show_nonprinting {
+            result.push(c);
+        }
         
         prev_prev_char = prev_char;
         prev_char = c;
@@ -241,4 +291,30 @@ pub fn print_all_content(file_paths: &Vec<&String>, arg_switch: &ArgSwitch) {
         let content = get_content(file, arg_switch);
         println!("{content}");
     }
+}
+
+
+fn is_printable(char: &char) -> bool {
+
+    if char.is_ascii_alphanumeric() {
+        return true;
+    }
+
+    if char.is_whitespace() {
+        return true;
+    }
+
+    if char.is_ascii_punctuation() {
+        return true;
+    }
+
+    if char.is_ascii_control() {
+        return true;
+    }
+
+    if char.is_ascii_graphic() {
+        return true;
+    }
+
+    false    
 }

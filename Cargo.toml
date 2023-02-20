@@ -1,7 +1,11 @@
 [package]
 name = "rcat"
 version = "0.1.0"
+authors = ["Frank Pereny"]
 edition = "2021"
+description = "A clone of the GNU concat tool built completely in Rust."
+readme = "README.md"
+repository = "https://github.com/fjpereny/rust-cat"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
