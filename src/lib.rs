@@ -2,6 +2,8 @@
 use std::process;
 use std::fs;
 
+use colored::*;
+
 #[derive(Debug)]
 pub struct ArgSwitch {
     pub number_nonblank: bool,
@@ -29,25 +31,35 @@ impl ArgSwitch {
 
 
 pub fn print_version() {
-    let version = 
 
-"rcat (RNGNU coreutils) 0.1
-Copyright (C) 2023 Frank Pereny
+    let title = "rcat (RNGNU coreutils) 0.1".bright_cyan();
+
+    let version = 
+"Copyright (C) 2023 Frank Pereny
 License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Written by Frank Pereny.";
 
-    println!("{version}")
+    println!();
+    println!("{title}");
+    println!("{version}");
+    println!();
 }
 
 
 pub fn print_help() {
+
+    println!();
+    print!("Usage: ");
+    print!("{}", "rcat ".bright_cyan());
+    print!("{}", "[OPTION...] ".bright_red());
+    println!("{}", "[FILE]... ".bright_green());
+
     let help_menu = 
 
-"Usage: rcat [OPTION]... [FILE]...
-Concatenate FILE(s) to standard output.
+"Concatenate FILE(s) to standard output.
 
 With no FILE, or when FILE is -, read standard input.
 
@@ -105,7 +117,7 @@ pub fn parse_args(args: &[String]) -> (ArgSwitch, Vec<&String>) {
                 "--show-tabs" => arg_switch.show_tabs = true,
                 "--show-nonprinting" => arg_switch.show_nonprinting = true,
                 _ => {
-                    println!("Invalid parameter");
+                    println!("Invalid switch parameter");
                     print_help();
                     process::exit(1);
                 }
@@ -135,8 +147,9 @@ pub fn parse_args(args: &[String]) -> (ArgSwitch, Vec<&String>) {
                     'u' => continue,
                     'v' => arg_switch.show_nonprinting = true,
                     _ => {
-                        println!("Unknown switch parameter.\n");
+                        println!("Invalid switch parameter.\n");
                         print_help();
+                        process::exit(1);
                     }                        
                 }
             }
