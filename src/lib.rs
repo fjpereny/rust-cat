@@ -32,7 +32,7 @@ impl ArgSwitch {
 
 pub fn print_version() {
 
-    let title = "rcat (RNGNU coreutils) 0.1".bright_cyan();
+    let title = "catr 0.1".bright_cyan();
 
     let version = 
 "Copyright (C) 2023 Frank Pereny
@@ -53,7 +53,7 @@ pub fn print_help() {
 
     println!();
     print!("Usage: ");
-    print!("{}", "rcat ".bright_cyan());
+    print!("{}", "catr ".bright_cyan());
     print!("{}", "[OPTION...] ".bright_red());
     println!("{}", "[FILE]... ".bright_green());
 
@@ -77,12 +77,11 @@ With no FILE, or when FILE is -, read standard input.
       --version     output version information and exit
 
 Examples:
-  rcat f - g  Output f's contents, then standard input, then g's contents.
-  rcat        Copy standard input to standard output.
+  catr f - g  Output f's contents, then standard input, then g's contents.
+  catr        Copy standard input to standard output.
 
-RNGNU online help: <https://www.frankpereny.com/rcat>
-Full documentation <https://www.frankpereny.com/rcat/docs>
-or available locally via: info '(coreutils) cat invocation'";
+Git Repository: <https://github.com/fjpereny/rust-cat>
+Crate.io <https://crates.io/crates/catr>";
 
     println!("{help_menu}")
 }
