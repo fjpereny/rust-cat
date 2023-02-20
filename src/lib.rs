@@ -170,6 +170,10 @@ pub fn get_content(file_path: &str, arg_switch: &ArgSwitch) -> String {
     for c in content {
         let c = c as char;
 
+        if arg_switch.show_nonprinting {
+            
+        }
+
         if arg_switch.show_tabs && c == '\t' {
             result.push_str("^I");
             continue;
