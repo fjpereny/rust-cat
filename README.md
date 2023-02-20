@@ -1,5 +1,6 @@
 # rcat (Rust Cat)
 Clone of Unix cat command written in Rust
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ## Usage
 
