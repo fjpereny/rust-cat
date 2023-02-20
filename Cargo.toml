@@ -1,9 +1,9 @@
 [package]
-name = "rcat"
+name = "catr"
 version = "0.1.0"
 authors = ["Frank Pereny"]
 edition = "2021"
-description = "A clone of the GNU concat tool built completely in Rust."
+description = "A fully functional clone of the GNU concat tool built completely in Rust."
 readme = "README.md"
 license = "LICENSE"
 repository = "https://github.com/fjpereny/rust-cat"
