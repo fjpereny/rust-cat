@@ -1,6 +1,6 @@
 [package]
 name = "catr"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Frank Pereny"]
 edition = "2021"
 description = "A fully functional clone of the GNU concat tool built completely in Rust."
