@@ -4,18 +4,28 @@ use std::fs;
 
 use colored::*;
 
+/// Switches for the command line options.
+/// Example: catr -n example.txt will set number to true
 #[derive(Debug)]
 pub struct ArgSwitch {
+    /// Show line numbers for non-blank lines only
     pub number_nonblank: bool,
+    /// Show each line end with a $
     pub show_ends: bool,
+    /// Show line numbers for all lines
     pub number: bool,
+    /// Remove duplicate blank lines (maximum 1 blank line)
     pub squeeze_blank: bool,
+    /// Show tabs as ^I
     pub show_tabs: bool,
+    /// Ignored
     pub u: bool,
+    /// Show non-printable characters in ^ and M notation
     pub show_nonprinting:bool,
 }
 
 impl ArgSwitch {
+    /// Create a new ArgSwitch with default false values
     pub fn new() -> Self {
         ArgSwitch { 
             number_nonblank: false, 
@@ -30,6 +40,7 @@ impl ArgSwitch {
 }
 
 
+/// Prints the version menu to the console
 pub fn print_version() {
 
     let title = "catr 0.1".bright_cyan();
@@ -49,6 +60,7 @@ Written by Frank Pereny.";
 }
 
 
+/// Prints the help menu to the console
 pub fn print_help() {
 
     println!();
@@ -87,6 +99,7 @@ Crate.io <https://crates.io/crates/catr>";
 }
 
 
+/// Parses the arguments into file paths and switch arguments
 pub fn parse_args(args: &[String]) -> (ArgSwitch, Vec<&String>) {
     let mut file_paths: Vec<&String> = Vec::new();
     let mut arg_switch = ArgSwitch::new();
@@ -160,6 +173,7 @@ pub fn parse_args(args: &[String]) -> (ArgSwitch, Vec<&String>) {
 }
 
 
+/// Reads file content to a vector of bytes
 pub fn get_content(file_path: &str, arg_switch: &ArgSwitch) -> String {
     let content = fs::read(file_path).unwrap_or_else(|err| {
         println!();
@@ -285,6 +299,7 @@ pub fn get_content(file_path: &str, arg_switch: &ArgSwitch) -> String {
 }
 
 
+/// Prints content to the standard output for all files
 pub fn print_all_content(file_paths: &Vec<&String>, arg_switch: &ArgSwitch) {
     for file in file_paths {
         let content = get_content(file, arg_switch);
